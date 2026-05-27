@@ -1,0 +1,307 @@
+/* Импорт шрифта должен быть в самом начале */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap');
+
+/* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-card: #111111;
+    --text-light: #e0e0e0;
+    --text-dim: #888888;
+    --accent: #c44569;
+    --accent-glow: rgba(196, 69, 105, 0.4);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.5;
+    /* Начальная видимость — сразу 1, без ожидания JS */
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+/* Если JS добавит класс loaded — можно использовать для дополнительных эффектов */
+body.loaded {
+    opacity: 1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+}
+
+/* ========== ШАПКА ========== */
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.site-title {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 1.5rem auto 0;
+    opacity: 0.6;
+}
+
+/* ========== СЕТКА ФОТОСЕТОВ ========== */
+.sets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.set-card {
+    cursor: pointer;
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    transform: translateY(0);
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5);
+}
+
+.set-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 40px -20px rgba(0,0,0,0.8);
+}
+
+.set-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.set-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    display: block;
+}
+
+.set-card:hover .set-image img {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+}
+
+.set-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.set-card:hover .set-image::after {
+    opacity: 1;
+}
+
+.set-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 1rem 1.2rem 0.25rem;
+    letter-spacing: -0.3px;
+}
+
+.set-count {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0 1.2rem 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    z-index: 1001;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(30,30,30,0.6);
+    backdrop-filter: blur(4px);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.8rem 1.2rem;
+    border-radius: 60px;
+    transition: all 0.2s;
+    z-index: 1001;
+    font-weight: 300;
+}
+
+.modal-nav:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.prev-btn {
+    left: 25px;
+}
+
+.next-btn {
+    right: 25px;
+}
+
+.modal-counter {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    color: #ddd;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 40px;
+    z-index: 1001;
+    pointer-events: none;
+    font-family: monospace;
+}
+
+/* ========== АДАПТАЦИЯ ========== */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    .site-title {
+        font-size: 2rem;
+    }
+    .subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+    .sets-grid {
+        gap: 1.2rem;
+        grid-template-columns: 1fr;
+    }
+    .set-title {
+        font-size: 1.2rem;
+    }
+    .modal-nav {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+    .close-modal {
+        top: 20px;
+        right: 25px;
+        font-size: 36px;
+    }
+    .modal-content {
+        max-width: 95%;
+        max-height: 80%;
+    }
+}
+
+/* ========== АНИМАЦИЯ КАРТОЧЕК ========== */
+.set-card {
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.set-card:nth-child(1) { animation-delay: 0.05s; }
+.set-card:nth-child(2) { animation-delay: 0.10s; }
+.set-card:nth-child(3) { animation-delay: 0.15s; }
+.set-card:nth-child(4) { animation-delay: 0.20s; }
+.set-card:nth-child(5) { animation-delay: 0.25s; }
+.set-card:nth-child(6) { animation-delay: 0.30s; }

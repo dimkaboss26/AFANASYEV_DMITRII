@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photograph | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 class="site-title">Dmitrii Afanasyev</h1>
+        <p class="subtitle">Portfolio</p>
+    </header>
+
+    <div class="sets-grid" id="setsGrid">
+        <!-- Alina 17.08.24 -->
+        <div class="set-card" data-set-index="0">
+            <div class="set-image">
+                <img src="images/Alina0/Alina_preview.jpg" alt="Alina 17.08.24">
+            </div>
+            <h2 class="set-title">Alina 17.08.24</h2>
+            <p class="set-count">12 фото</p>
+        </div>
+
+        <!-- Alina 28.08.24 -->
+        <div class="set-card" data-set-index="1">
+            <div class="set-image">
+                <img src="images/Alina1/AlinaA_preview.jpg" alt="Alina 28.08.24">
+            </div>
+            <h2 class="set-title">Alina 28.08.24</h2>
+            <p class="set-count">16 фото</p>
+        </div>
+
+        <!-- Alisa 31.07.24 -->
+        <div class="set-card" data-set-index="2">
+            <div class="set-image">
+                <img src="images/Alisa/archive/alisa_preview.jpg" alt="Alisa 31.07.24">
+            </div>
+            <h2 class="set-title">Alisa 31.07.24</h2>
+            <p class="set-count">14 фото</p>
+        </div>
+
+         <!-- Asya 29.09.24 -->
+        <div class="set-card" data-set-index="3">
+            <div class="set-image">
+                <img src="images/Asya/archive/Asya_preview.jpg" alt="Asya 29.09.24">
+            </div>
+            <h2 class="set-title">Asya 29.09.24</h2>
+            <p class="set-count">23 фото</p>
+        </div>
+
+         <!-- diana 08.12.24 -->
+        <div class="set-card" data-set-index="4">
+            <div class="set-image">
+                <img src="images/diana/archive/Diana_preview.jpg" alt="diana 08.12.24">
+            </div>
+            <h2 class="set-title">diana 08.12.24</h2>
+            <p class="set-count">18 фото</p>
+        </div>
+
+         <!-- lera 01.08.24 -->
+        <div class="set-card" data-set-index="5">
+            <div class="set-image">
+                <img src="images/lera/archive/lera_preview.jpg" alt="lera 01.08.24">
+            </div>
+            <h2 class="set-title">lera 01.08.24</h2>
+            <p class="set-count">18 фото</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Модальное окно (общее для всех сетов) -->
+<div class="modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <button class="modal-nav prev-btn" id="prevBtn">‹</button>
+    <img class="modal-content" id="modalImage" src="" alt="Фото">
+    <button class="modal-nav next-btn" id="nextBtn">›</button>
+    <div class="modal-counter" id="modalCounter"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
